@@ -1,0 +1,39 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}My App{% endblock %}</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Firebase App (the core Firebase SDK) -->
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+  <!-- Firebase Auth -->
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth-compat.js"></script>
+  
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_T_oFlI3H4jKlbcu510jrnF2-9NrclAw",
+      authDomain: "major-74058.firebaseapp.com",
+      projectId: "major-74058",
+      storageBucket: "major-74058.firebasestorage.app",
+      messagingSenderId: "518611614094",
+      appId: "1:518611614094:web:a8adb4f489e3beb1900cdf",
+      measurementId: "G-BH9L1DLDQV"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // Initialize Firebase Auth
+    const auth = firebase.auth();
+  </script>
+  
+  {% block head %}{% endblock %}
+</head>
+<body class="bg-gray-100">
+  {% block content %}{% endblock %}
+</body>
+</html>

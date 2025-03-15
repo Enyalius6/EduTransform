@@ -1,0 +1,11 @@
+pip install faiss-cpu
+pip install sentence-transformers
+pip install transformers
+pip install paddlepaddle paddleocr
+pip install pdf2image
+pip install tabula-py
+pip install pdfplumber
+pip install reportlab
+pip install spacy
+python -m spacy download en_core_web_sm
+choco install poppler

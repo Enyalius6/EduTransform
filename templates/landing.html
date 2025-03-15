@@ -1,0 +1,37 @@
+<!-- templates/landing.html -->
+{% extends "base.html" %}
+{% block title %}Landing Page{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col items-center justify-center">
+  <h1 class="text-4xl font-bold mb-8">Welcome to My App</h1>
+  <div class="space-x-4">
+    <a href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Login
+    </a>
+    <button id="googleLoginBtn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+      Login with Google
+    </button>
+    <a href="/register" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+      Register
+    </a>
+  </div>
+</div>
+
+<script>
+  // Google Login functionality using Firebase Auth
+  document.getElementById('googleLoginBtn').addEventListener('click', function() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        console.log("User signed in:", result.user);
+        // Redirect to the upload page after successful login
+        window.location.href = "/upload";
+      })
+      .catch((error) => {
+        console.error("Error during Google sign-in:", error);
+        alert(error.message);
+      });
+  });
+</script>
+{% endblock %}

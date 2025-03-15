@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Dynamic Quiz{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col items-center justify-center">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-xl">
+    <h2 class="text-2xl font-bold mb-4">Question {{ total_questions + 1 }} of 10</h2>
+    <p class="mb-2"><strong>Topic:</strong> {{ current_question.topic }}</p>
+    <p class="mb-4">{{ current_question.question }}</p>
+    <p class="mb-4"><strong>Time Remaining:</strong> <span id="timer">{{ remaining_time }}</span> seconds</p>
+    <form id="quizForm" method="POST">
+      <div class="mb-4">
+        <label class="block">
+          <input type="radio" name="answer" value="{{ current_question.option_A }}" required>
+          A {{ current_question.option_A }}
+        </label>
+      </div>
+      <div class="mb-4">
+        <label class="block">
+          <input type="radio" name="answer" value="{{ current_question.option_B }}">
+          B {{ current_question.option_B }}
+        </label>
+      </div>
+      <div class="mb-4">
+        <label class="block">
+          <input type="radio" name="answer" value="{{ current_question.option_C }}">
+          C {{ current_question.option_C }}
+        </label>
+      </div>
+      <div class="mb-4">
+        <label class="block">
+          <input type="radio" name="answer" value="{{ current_question.option_D }}">
+          D {{ current_question.option_D }}
+        </label>
+      </div>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Submit Answer
+      </button>
+    </form>
+  </div>
+</div>
+<script>
+  // JavaScript countdown timer (60-second timer)
+  let timeRemaining = 60;
+  let timerEl = document.getElementById("timer");
+  let interval = setInterval(function(){
+      timeRemaining--;
+      timerEl.textContent = timeRemaining;
+      if(timeRemaining <= 0){
+          clearInterval(interval);
+          // Auto-submit form if time is up
+          document.getElementById("quizForm").submit();
+      }
+  }, 1000);
+</script>
+{% endblock %}

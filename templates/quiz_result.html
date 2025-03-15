@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Quiz Results{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col items-center justify-center">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-2xl">
+    <h2 class="text-2xl font-bold mb-6 text-center">Quiz Complete!</h2>
+    <p class="mb-4 text-center">Your final score is: <strong>{{ score }} / {{ total }}</strong></p>
+    <h3 class="text-xl font-bold mb-4">Review of your responses:</h3>
+    <table class="min-w-full table-auto border-collapse mb-6">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="px-4 py-2 border">Question</th>
+          <th class="px-4 py-2 border">Your Answer</th>
+          <th class="px-4 py-2 border">Correct Answer</th>
+          <th class="px-4 py-2 border">Topic</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for q in question_history %}
+        <tr class="text-center">
+          <td class="px-4 py-2 border">{{ q.question }}</td>
+          <td class="px-4 py-2 border">{{ q.user_response }}</td>
+          <td class="px-4 py-2 border">{{ q.correct_answer }}</td>
+          <td class="px-4 py-2 border">{{ q.topic }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h3 class="text-xl font-bold mb-4 text-center">Get Your Study Materials</h3>
+    <form method="POST" action="{{ url_for('study_materials') }}" class="flex flex-col items-center">
+      <div class="mb-4">
+        <label for="complexity" class="block font-semibold">Explanation Complexity (1-5):</label>
+        <input type="number" name="complexity" min="1" max="5" required class="border px-2 py-1">
+      </div>
+      <div class="mb-4">
+        <label for="length" class="block font-semibold">Explanation Length (1-5):</label>
+        <input type="number" name="length" min="1" max="5" required class="border px-2 py-1">
+      </div>
+      <div class="mb-4">
+        <label for="real_life_examples" class="block font-semibold">Real-life Examples (1-5):</label>
+        <input type="number" name="real_life_examples" min="1" max="5" required class="border px-2 py-1">
+      </div>
+      <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        GET STUDY MATERIALS
+      </button>
+    </form>
+    <a href="{{ url_for('new_quiz') }}" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+        New Quiz
+      </a>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Study Materials{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col items-center justify-center">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-2xl text-center">
+    <h2 class="text-2xl font-bold mb-4">Your Study Materials Are Ready!</h2>
+    <p class="mb-6">A personalized analysis of your quiz performance has been generated.</p>
+    <a href="{{ url_for('static', filename=output_filename) }}" download class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Download Study Materials (PDF)
+      </a>
+    <div class="mt-6">
+      <h3 class="font-semibold">Summary:</h3>
+      <p>Total Questions: {{ summary.total_questions }}</p>
+      <p>Correct Answers: {{ summary.correct_answers }}</p>
+      <p>Performance: {{ summary.performance_percentage }}%</p>
+      <p>Pages Needing Review: {{ summary.pages_needing_review | join(', ') if summary.pages_needing_review else "None" }}</p>
+      <a href="{{ url_for('new_quiz') }}" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+        New Quiz
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
